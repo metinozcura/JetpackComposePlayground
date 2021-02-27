@@ -1,22 +1,18 @@
 package com.metinozcura.jetpackcomposeplayground
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.metinozcura.jetpackcomposeplayground.ui.theme.JetpackComposePlaygroundTheme
+import dev.chrisbanes.accompanist.glide.GlideImage
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,35 +24,35 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun ListItem(txt: String) {
-    Row(modifier = Modifier.height(96.dp)) {
-        Image(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = null,
+fun ListItem(item: DogeItem) {
+    Row(modifier = Modifier
+        .height(72.dp)
+        .padding(horizontal = 16.dp, vertical = 0.dp)) {
+        GlideImage(
+            data = item.imageUrl,
             modifier = Modifier
-                .width(96.dp)
-                .height(96.dp),
-            contentScale = ContentScale.Crop
+                .aspectRatio(1.0f)
+                .fillMaxHeight(),
+            contentDescription = null
         )
+        Spacer(modifier = Modifier.width(16.dp))
         Column(
             modifier = Modifier
-                .padding(10.dp)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = txt, color = Color.DarkGray)
-            Text(text = txt, color = Color.LightGray)
+            Text(text = item.quote, color = Color.DarkGray)
+            Text(text = item.author, color = Color.LightGray)
         }
     }
 }
 
 @Composable
 fun CreateList() {
-    LazyColumn {
-        items(100) { index ->
-            Log.i("mtn", index.toString())
-            ListItem(txt = index.toString())
-            Divider()
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        items(20) {
+            ListItem(item = DogeItem())
         }
     }
 }
