@@ -35,6 +35,9 @@ fun DefaultPreview() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
+                Spacer(modifier = Modifier
+                    .height(16.dp)
+                    .fillMaxWidth())
                 CreatePager()
             }
             items(20) {
@@ -46,7 +49,11 @@ fun DefaultPreview() {
 
 @Composable
 fun CreateListItem(item: DogeItem) {
-    Row(modifier = Modifier.height(72.dp)) {
+    Row(
+        modifier = Modifier
+            .height(72.dp)
+            .padding(horizontal = 16.dp, vertical = 0.dp)
+    ) {
         Image(
             painter = painterResource(id = R.drawable.img_doge),
             contentDescription = null,
@@ -78,11 +85,11 @@ fun CreateListItem(item: DogeItem) {
 @Composable
 fun CreatePager() {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(32.dp),
-        modifier = Modifier.horizontalScroll(
-            rememberScrollState()
-        )
+        modifier = Modifier
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Spacer(modifier = Modifier.width(0.dp))
         for (i in 0 until 10) {
             CreatePagerItem()
         }
