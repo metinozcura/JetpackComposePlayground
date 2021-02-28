@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-/*@Preview(showBackground = true)*/
 @Composable
 fun DefaultPreview() {
     JetpackComposePlaygroundTheme {
@@ -38,21 +37,9 @@ fun DefaultPreview() {
             item {
                 CreatePager()
             }
-            item {
-                CreateList()
+            items(20) {
+                CreateListItem(item = DogeItem())
             }
-        }
-    }
-}
-
-@Composable
-fun CreateList() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
-    ) {
-        for (i in 0 until 20) {
-            CreateListItem(item = DogeItem())
         }
     }
 }
